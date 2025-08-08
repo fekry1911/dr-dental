@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "561718595895",
+    "project_id": "drdental-5d61e",
+    "storage_bucket": "drdental-5d61e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:561718595895:android:739532af15c7e5ec248ab2",
+        "android_client_info": {
+          "package_name": "com.example.drdental"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPbEMdpNkjexk13h9LRCLopaEi9W9ewxI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

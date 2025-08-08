@@ -1,7 +1,10 @@
+import 'package:dr_dental/core/const/const.dart';
+import 'package:dr_dental/core/helpers/extentions/context_extention.dart';
 import 'package:flutter/material.dart';
 
+import '../../core/utils/size_utils.dart';
 import '../../main.dart';
-import '../login_screen/login_screen.dart';
+import '../login_screen/presentation/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -14,11 +17,9 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    Future.delayed(Duration(seconds: 4), () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => LoginScreen()),
-      );
+    Future.delayed(const Duration(seconds: 4), () {
+      context.pushAndRemoveUntil(loginScreen);
+
     });
   }
 
