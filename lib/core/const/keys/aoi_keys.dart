@@ -1,0 +1,4 @@
+String apiKey = 'Bearer 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';
+String url="https://xvrxihtoxysqakxmbnth.supabase.co";
+String anonKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh2cnhpaHRveHlzcWFreG1ibnRoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3MTE4OTcsImV4cCI6MjA2NjI4Nzg5N30.M1_MfkiH9OVs5ung38Bo9NokPMUhT60rmXqWtffEFKM";
+
