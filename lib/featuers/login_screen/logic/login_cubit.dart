@@ -32,7 +32,9 @@ class LoginCubit extends Cubit<LoginState> {
         ),
       )
           .then((value) async {
+            print("done");
         await CacheHelper.putString(key: "uid", value: value.user!.uid);
+        emit(LoginSucc());
 
       });
     } catch (e) {

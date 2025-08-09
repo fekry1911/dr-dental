@@ -1,10 +1,12 @@
 import 'package:cherry_toast/cherry_toast.dart';
 import 'package:cherry_toast/resources/arrays.dart';
+import 'package:dr_dental/core/helpers/extentions/context_extention.dart';
 import 'package:dr_dental/featuers/login_screen/logic/login_cubit.dart';
 import 'package:dr_dental/featuers/login_screen/presentation/widgets/login_card.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/app_export.dart';
+import '../../../core/const/const.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -36,6 +38,7 @@ class LoginScreen extends StatelessWidget {
               style: TextStyle(color: Colors.black),
             ),
           ).show(context);
+          context.pushNamed(liquidBottomNavExample);
         }
       },
       builder: (context, state) {
