@@ -1,6 +1,7 @@
 const String loginScreen="/login-screen";
 const String splashScreen="/splash-screen";
-const String liquidBottomNavExample="/liquidBottomNavExample-screen";
+const String homeScreen="/home-screen";
+
 
 
 

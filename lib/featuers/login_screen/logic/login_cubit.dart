@@ -33,7 +33,7 @@ class LoginCubit extends Cubit<LoginState> {
       )
           .then((value) async {
             print("done");
-        await CacheHelper.putString(key: "uid", value: value.user!.uid);
+         CacheHelper.putString(key: "uid", value: value.user!.uid);
         emit(LoginSucc());
 
       });
@@ -43,6 +43,13 @@ class LoginCubit extends Cubit<LoginState> {
 
       emit(LoginFail(error: e.toString()));
     }
+  }
+  void logOut() async {
+    await loginRebo.signOut().then((onValue){
+      CacheHelper.removeString(key: "uid");
+      emit(LogOut());
+
+    });
   }
 
 }

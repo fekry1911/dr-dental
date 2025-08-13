@@ -1,4 +1,5 @@
 import 'package:dr_dental/core/const/const.dart';
+import 'package:dr_dental/core/helpers/cache_helper.dart';
 import 'package:dr_dental/core/helpers/extentions/context_extention.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +19,17 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
 
     Future.delayed(const Duration(seconds: 4), () {
-      context.pushAndRemoveUntil(loginScreen);
+      var uid=CacheHelper.getString(key: "uid");
+      if(uid==null){
+        context.pushAndRemoveUntil(loginScreen);
+        print(uid);
+      }
+      else{
+        context.pushAndRemoveUntil(homeScreen);
+        print(uid);
+
+      }
+
 
     });
   }

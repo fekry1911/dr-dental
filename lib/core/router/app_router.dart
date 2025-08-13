@@ -3,7 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../demo.dart';
+import '../../featuers/home/presentation/demo.dart';
 import '../../featuers/login_screen/logic/login_cubit.dart';
 import '../../featuers/login_screen/presentation/login_screen.dart';
 import '../../featuers/splash_screen/splash_screen.dart';
@@ -29,10 +29,14 @@ class AppRouter {
           builder:
               (_) => SplashScreen(),
         );
-        case liquidBottomNavExample:
+        case homeScreen:
           return MaterialPageRoute(builder: (_) {
-              return LiquidBottomNavExample();
+              return MultiBlocProvider(providers: [
+                BlocProvider(create: (context) => sl<LoginCubit>()),
+              ],
+              child: HomeScreen());
           });
+
 
 
       default:
