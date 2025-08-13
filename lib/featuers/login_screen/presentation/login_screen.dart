@@ -38,7 +38,7 @@ class LoginScreen extends StatelessWidget {
               style: TextStyle(color: Colors.black),
             ),
           ).show(context);
-          context.pushNamed(liquidBottomNavExample);
+          context.pushNamed(homeScreen);
         }
       },
       builder: (context, state) {

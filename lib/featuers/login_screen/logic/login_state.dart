@@ -16,4 +16,5 @@ final class ToggleSecure extends LoginState{
   bool isSecure;
   ToggleSecure({required this.isSecure});
 }
+final class LogOut extends LoginState {}
 
