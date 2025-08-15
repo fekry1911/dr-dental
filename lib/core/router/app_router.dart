@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../featuers/home/logic/home_cubit.dart';
 import '../../featuers/home/presentation/demo.dart';
 import '../../featuers/login_screen/logic/login_cubit.dart';
 import '../../featuers/login_screen/presentation/login_screen.dart';
@@ -33,6 +34,7 @@ class AppRouter {
           return MaterialPageRoute(builder: (_) {
               return MultiBlocProvider(providers: [
                 BlocProvider(create: (context) => sl<LoginCubit>()),
+                BlocProvider(create: (context) => sl<HomeCubit>()),
               ],
               child: HomeScreen());
           });
