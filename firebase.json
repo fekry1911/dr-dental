@@ -1,1 +1,23 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"drdental-5d61e","appId":"1:561718595895:android:739532af15c7e5ec248ab2","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"drdental-5d61e","configurations":{"android":"1:561718595895:android:739532af15c7e5ec248ab2","ios":"1:561718595895:ios:2ee574c19f4f8241248ab2","windows":"1:561718595895:web:44649b7981c0ab49248ab2"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "drdental-5d61e",
+          "appId": "1:561718595895:android:739532af15c7e5ec248ab2",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "drdental-5d61e",
+          "configurations": {
+            "android": "1:561718595895:android:739532af15c7e5ec248ab2",
+            "ios": "1:561718595895:ios:2ee574c19f4f8241248ab2",
+            "windows": "1:561718595895:web:44649b7981c0ab49248ab2"
+          }
+        }
+      }
+    }
+  }
+}

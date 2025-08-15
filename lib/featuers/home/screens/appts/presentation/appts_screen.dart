@@ -5,6 +5,7 @@ import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
 
 import '../../../../../core/app_export.dart';
 import '../../../../login_screen/logic/login_cubit.dart';
+import '../../../../user/user_card.dart';
 
 class AppptsScreen extends StatefulWidget {
   const AppptsScreen({super.key});
@@ -14,6 +15,8 @@ class AppptsScreen extends StatefulWidget {
 }
 
 class _AppptsScreenState extends State<AppptsScreen> {
+  DateTime _currentDate = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -23,12 +26,12 @@ class _AppptsScreenState extends State<AppptsScreen> {
           children: [
             CalendarCarousel<Event>(
               onDayPressed: (DateTime date, List<Event> events) {
-               
-              },
+setState(() {
+  _currentDate=date;
+});              },
               weekendTextStyle: TextStyle(color: Colors.red),
               thisMonthDayBorderColor: Colors.grey,
               selectedDateTime: _currentDate,
-              markedDatesMap: _markedDateMap,
               height: 400.h,
               selectedDayButtonColor: Colors.blue,
               selectedDayBorderColor: Colors.blueAccent,
@@ -47,7 +50,6 @@ class _AppptsScreenState extends State<AppptsScreen> {
                     child: PatientCard(
                       name: "abdo fekry",
                       age: "30",
-                      diagnosis: "asdasdbkasdasdbadkhabdkhasbd",
                     ),
                   );
                 },
