@@ -29,7 +29,7 @@ final class GetAllPatientsFAil extends BookPatientState {
 }
 
 final class AddPatientSelectionChanged extends BookPatientState {
-  final Set<int> selectedPatients;
+  final Set<PatientModel> selectedPatients;
   final bool selectionMode;
 
   AddPatientSelectionChanged(this.selectedPatients, this.selectionMode);

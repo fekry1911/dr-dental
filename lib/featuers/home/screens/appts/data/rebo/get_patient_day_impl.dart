@@ -9,19 +9,17 @@ class GetPatientsDayImpl extends GetPatientsDay {
   GetPatientsDayImpl(this.firestore);
 
   @override
+  @override
   Future<List<PatientModel>> getPatientsOfDay(String day) async {
-    List<PatientModel> patientList = [];
-
-    var response = await firestore
-        .collection('patients')
+    final response = await firestore
+        .collection('booking')
         .doc(day)
-        .collection('list') // اسم الـ sub-collection للمرضى
+        .collection('bookings')
         .get();
 
-    for (var doc in response.docs) {
-      patientList.add(PatientModel.fromMap(doc.data()));
-    }
-
-    return patientList;
+    return response.docs
+        .map((doc) => PatientModel.fromMap(doc.data()))
+        .toList();
   }
+
 }

@@ -5,6 +5,7 @@ import 'package:dr_dental/widgets/empty.dart';
 import 'package:dr_dental/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../widgets/calender.dart';
 import '../../../../../widgets/share_error_animation.dart';
 import '../../../../user/user_card.dart';
 import '../logic/add_patient_cubit.dart';
@@ -32,7 +33,9 @@ class AllPatients extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20.0.h),
                       ),
                       child: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          showStyledDatePickerDialog(context);
+                        },
                         icon: Icon(Icons.add, color: Colors.blue),
                       ),
                     ),
@@ -53,7 +56,9 @@ class AllPatients extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20.0.h),
                       ),
                       child: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          print(cubit.selectedPatients.last.age);
+                        },
                         icon: Icon(Icons.delete, color: Colors.red),
                       ),
                     ),
@@ -129,11 +134,11 @@ class AllPatients extends StatelessWidget {
                     return GestureDetector(
                       onLongPress: () {
                         cubit.toggleSelectionMode(true);
-                        cubit.togglePatientSelection(index);
+                        cubit.togglePatientSelection(cubit.patients[index]);
                       },
                       onTap: () {
                         if (cubit.selectionMode) {
-                          cubit.togglePatientSelection(index);
+                          cubit.togglePatientSelection(cubit.patients[index]);
                         }
                       },
                       child: SizedBox(
@@ -142,9 +147,9 @@ class AllPatients extends StatelessWidget {
                           children: [
                             if (cubit.selectionMode)
                               Checkbox(
-                                value: cubit.selectedPatients.contains(index),
+                                value: cubit.selectedPatients.contains(cubit.patients[index]),
                                 onChanged: (_) {
-                                  cubit.togglePatientSelection(index);
+                                  cubit.togglePatientSelection(cubit.patients[index]);
                                 },
                               ),
                             Expanded(

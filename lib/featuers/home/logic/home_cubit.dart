@@ -6,7 +6,6 @@ import '../screens/add_patients/logic/add_new_patient_cubit.dart';
 import '../screens/add_patients/presentation/add_patient.dart';
 import '../screens/appts/logic/gtpatientday_cubit.dart';
 import '../screens/appts/presentation/appts_screen.dart';
-import '../screens/patients/data/rebo/add_patiemt/add_patient.dart';
 import '../screens/patients/logic/add_patient_cubit.dart';
 import '../screens/patients/presentation/all_patients.dart';
 
@@ -22,14 +21,16 @@ class HomeCubit extends Cubit<HomeState> {
     print(screens[index]);
     emit(ChangeBottomNav(index));
   }
-List<String> titles=[
-  "Appointments",
-  "patients",
-  "Add Patient"
-];
+
+  List<String> titles = ["Appointments", "patients", "Add Patient"];
+
   List<Widget> screens = [
     BlocProvider(
-      create: (context) => sl<GetpatientdayCubit>(),
+      create:
+          (context) =>
+              sl<GetpatientdayCubit>()..getPatientsOfDay(
+                "${DateTime.now()!.year}-${DateTime.now()!.month.toString().padLeft(2, '0')}-${DateTime.now()!.day.toString().padLeft(2, '0')}",
+              ),
       child: AppptsScreen(),
     ),
     BlocProvider(
