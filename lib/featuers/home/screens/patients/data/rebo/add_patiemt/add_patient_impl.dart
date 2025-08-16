@@ -8,10 +8,15 @@ class BookingPatientImpl extends BookingPatient {
   BookingPatientImpl(this.firebaseFirestore);
 
   @override
-  Future bookingPatient(PatientModel patientModel, date) async {
-    await firebaseFirestore.collection('patients').doc(date).set(
-        patientModel.toMap());
+  Future bookingPatient(Set<PatientModel> patientModels, String date) async {
+    final dateDoc = firebaseFirestore.collection('booking').doc(date);
+
+    for (final patient in patientModels) {
+      print(patient);
+      await dateDoc.collection('bookings').doc(patient.id).set(patient.toMap());
+    }
   }
+
 
   @override
   Future<List<PatientModel>> getAllPatients() async {
