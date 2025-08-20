@@ -101,10 +101,9 @@ Future<void> showStyledDatePickerDialog(BuildContext context) async {
                                 String formatted =
                                     "${selectedDay!.year}-${selectedDay!.month.toString().padLeft(2, '0')}-${selectedDay!.day.toString().padLeft(2, '0')}";
                                 print(formatted);
-
                                 cubit.bookPatient(formatted);
 
-                                // ✅ قفل الديالوج بعد النجاح
+
                                 Navigator.pop(context);
                               }
                             },

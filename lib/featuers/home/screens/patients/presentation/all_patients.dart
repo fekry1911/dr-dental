@@ -1,10 +1,12 @@
 import 'package:dr_dental/core/app_export.dart';
+import 'package:dr_dental/core/helpers/extentions/context_extention.dart';
 import 'package:dr_dental/core/theme/app_colors.dart';
 import 'package:dr_dental/core/theme/text_themes.dart';
 import 'package:dr_dental/widgets/empty.dart';
 import 'package:dr_dental/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../core/const/const.dart';
 import '../../../../../widgets/calender.dart';
 import '../../../../../widgets/share_error_animation.dart';
 import '../../../../user/user_card.dart';
@@ -42,7 +44,7 @@ class AllPatients extends StatelessWidget {
                   ),
 
                   SizedBox(
-                    height: 40, // ارتفاع الخط العمودي
+                    height: 40.h, // ارتفاع الخط العمودي
                     child: const VerticalDivider(
                       color: Colors.grey,
                       thickness: 2,
@@ -57,7 +59,7 @@ class AllPatients extends StatelessWidget {
                       ),
                       child: IconButton(
                         onPressed: () {
-                          print(cubit.selectedPatients.last.age);
+                          cubit.deletePatients();
                         },
                         icon: Icon(Icons.delete, color: Colors.red),
                       ),
@@ -106,8 +108,6 @@ class AllPatients extends StatelessWidget {
             builder: (context, state) {
               if (state is GetAllPatientsLoading) {
                 return Center(child: LoadingShared());
-              } else if (state is GetAllPatientsFAil) {
-                return Center(child: ErrorShared());
               } else if (cubit.patients.isEmpty) {
                 return Center(
                   child: Column(
@@ -123,9 +123,10 @@ class AllPatients extends StatelessWidget {
                     ],
                   ),
                 );
+              } else if (state is GetAllPatientsFAil) {
+                return Center(child: ErrorShared());
               }
 
-              // لو فيه بيانات
               return Expanded(
                 child: ListView.separated(
                   padding: EdgeInsets.only(bottom: 80.h),
@@ -147,15 +148,27 @@ class AllPatients extends StatelessWidget {
                           children: [
                             if (cubit.selectionMode)
                               Checkbox(
-                                value: cubit.selectedPatients.contains(cubit.patients[index]),
+                                value: cubit.selectedPatients.contains(
+                                  cubit.patients[index],
+                                ),
                                 onChanged: (_) {
-                                  cubit.togglePatientSelection(cubit.patients[index]);
+                                  cubit.togglePatientSelection(
+                                    cubit.patients[index],
+                                  );
                                 },
                               ),
                             Expanded(
-                              child: PatientCard(
-                                name: cubit.patients[index].name,
-                                age: cubit.patients[index].age,
+                              child: GestureDetector(
+                                onTap: () {
+                                  context.pushNamed(
+                                    patientScreen,
+                                    arguments: cubit.patients[index],
+                                  );
+                                },
+                                child: PatientCard(
+                                  name: cubit.patients[index].name,
+                                  age: cubit.patients[index].age,
+                                ),
                               ),
                             ),
                           ],
