@@ -8,6 +8,7 @@ import '../../featuers/home/presentation/demo.dart';
 import '../../featuers/login_screen/logic/login_cubit.dart';
 import '../../featuers/login_screen/presentation/login_screen.dart';
 import '../../featuers/splash_screen/splash_screen.dart';
+import '../../featuers/user/logic/patient_data_cubit.dart';
 import '../app_export.dart';
 import '../const/const.dart';
 import '../di/di.dart';
@@ -42,7 +43,11 @@ class AppRouter {
       case patientScreen:
         return MaterialPageRoute(
           builder:
-              (_) => PatientScreen(patient:settings.arguments as PatientModel),
+              (_) =>
+              BlocProvider(
+                create: (context) => sl<PatientDataCubit>()..getPatientDataFunc(settings.arguments as String),
+                child: PatientScreen(),
+              ),
         );
 
 

@@ -162,7 +162,7 @@ class AllPatients extends StatelessWidget {
                                 onTap: () {
                                   context.pushNamed(
                                     patientScreen,
-                                    arguments: cubit.patients[index],
+                                    arguments: cubit.patients[index].id,
                                   );
                                 },
                                 child: PatientCard(
