@@ -1,8 +1,8 @@
-
-
+import 'package:dr_dental/featuers/user/presentation/patient-screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../data/models/patient_model.dart';
 import '../../featuers/home/logic/home_cubit.dart';
 import '../../featuers/home/presentation/demo.dart';
 import '../../featuers/login_screen/logic/login_cubit.dart';
@@ -20,25 +20,30 @@ class AppRouter {
       case loginScreen:
         return MaterialPageRoute(
           builder:
-              (_) => BlocProvider(
-            create: (context) => sl<LoginCubit>(),
-            child: LoginScreen(),
-          ),
+              (_) =>
+              BlocProvider(
+                create: (context) => sl<LoginCubit>(),
+                child: LoginScreen(),
+              ),
         );
       case splashScreen:
         return MaterialPageRoute(
           builder:
               (_) => SplashScreen(),
         );
-        case homeScreen:
-          return MaterialPageRoute(builder: (_) {
-              return MultiBlocProvider(providers: [
-                BlocProvider(create: (context) => sl<LoginCubit>()),
-                BlocProvider(create: (context) => sl<HomeCubit>()),
-              ],
+      case homeScreen:
+        return MaterialPageRoute(builder: (_) {
+          return MultiBlocProvider(providers: [
+            BlocProvider(create: (context) => sl<LoginCubit>()),
+            BlocProvider(create: (context) => sl<HomeCubit>()),
+          ],
               child: HomeScreen());
-          });
-
+        });
+      case patientScreen:
+        return MaterialPageRoute(
+          builder:
+              (_) => PatientScreen(patient:settings.arguments as PatientModel),
+        );
 
 
       default:

@@ -10,12 +10,18 @@ class AppPatientImpl extends AddNewPatient {
   Future<void> addNewPatient(PatientModel patientModel) async {
     final docRef = firestore.collection('patients').doc();
 
+
+
+    await firestore.collection('patients').doc(docRef.id).set({
+      "id": docRef.id,
+      ...patientModel.toMap(),
+    });
     // دمج بيانات المريض مع الـ id
-    final patientData = {
+   /* final patientData = {
       ...patientModel.toMap(),
       'id': docRef.id,
     };
 
-    await docRef.set(patientData);
+    await docRef.set(patientData);*/
   }
 }

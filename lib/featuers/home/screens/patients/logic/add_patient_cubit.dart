@@ -2,6 +2,7 @@ import 'package:dr_dental/data/models/patient_model.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../../../../core/app_export.dart';
+import '../data/model/booking_model.dart';
 import '../data/rebo/add_patiemt/add_patient.dart';
 
 part 'add_patient_state.dart';
@@ -14,13 +15,29 @@ class BookPatientCubit extends Cubit<BookPatientState> {
   bool selectionMode = false;
   Set<PatientModel> selectedPatients = {};
   List<PatientModel> patients = [];
+  List<BookingModel> bookings = [];
 
   Future<void> getAllPatients() async {
     patients = [];
+    bookings = [];
     emit(GetAllPatientsLoading());
     try {
       patients = await bookingPatient.getAllPatients();
+      print(patients[0].bookings);
+
       emit(GetAllPatientsSucc(patients));
+    } catch (e) {
+      emit(GetAllPatientsFAil(e.toString()));
+    }
+  }
+
+  Future<void> deletePatients() async {
+    try {
+      await bookingPatient.deletePatientsBookings(selectedPatients);
+      await bookingPatient.deletePatients(selectedPatients);
+      selectedPatients.clear();
+      selectionMode = false;
+      getAllPatients();
     } catch (e) {
       emit(GetAllPatientsFAil(e.toString()));
     }
@@ -29,14 +46,9 @@ class BookPatientCubit extends Cubit<BookPatientState> {
   Future<void> bookPatient(String date) async {
     emit(GetAllPatientsLoading());
     try {
-      await bookingPatient.bookingPatient(
-        selectedPatients,
-        date,
-      );
-      // بعد ما نخلص الحجز نجيب كل المرضى تاني
-      patients = await bookingPatient.getAllPatients();
-
-      // نفضي الاختيار بعد الحجز
+      await bookingPatient.bookingPatient(selectedPatients, date);
+      await bookingPatient.addBookingToPatient(selectedPatients, date);
+      getAllPatients();
       selectedPatients.clear();
       selectionMode = false;
 

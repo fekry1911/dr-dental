@@ -1,10 +1,7 @@
 import 'package:dr_dental/core/app_export.dart';
-import 'package:dr_dental/core/helpers/extentions/context_extention.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
-import '../../../core/const/const.dart';
-import '../../login_screen/logic/login_cubit.dart';
 import '../logic/home_cubit.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -56,29 +53,19 @@ class HomeScreen extends StatelessWidget {
                   textColor: Colors.blue,
                 ),
                 GButton(
-                  icon: Icons.favorite,
+                  icon: Icons.group,
                   text: "Patients",
                   iconActiveColor: Colors.blue,
                   textColor: Colors.blue,
                 ),
                 GButton(
-                  icon: Icons.search,
-                  text: "Reports",
+                  icon: Icons.add,
+                  text: "add patient",
                   iconActiveColor: Colors.blue,
                   textColor: Colors.blue,
                 ),
               ],
-            )
-            ,
-            // Floating bottom navigation using LiquidGlass
-            floatingActionButton:
-                cubit.index == 0
-                    ? FloatingActionButton(
-                      onPressed: () {},
-                      child: Icon(Icons.add, color: Colors.white),
-                      backgroundColor: Colors.blue,
-                    )
-                    : null,
+            ),
           ),
         );
       },

@@ -1,10 +1,15 @@
-class PatientModel {
+import 'package:dr_dental/featuers/home/screens/patients/data/model/booking_model.dart';
+
+import '../../core/app_export.dart';
+
+class PatientModel extends Equatable {
   String name;
   String age;
   String address;
   String gender;
   String phone;
   String? id;
+  List<BookingModel>? bookings;
 
   PatientModel({
     required this.name,
@@ -13,7 +18,11 @@ class PatientModel {
     required this.gender,
     required this.phone,
     this.id,
+    this.bookings,
   });
+
+  @override
+  List<Object?> get props => [id];
 
   // تحويل الكائن إلى Map
   Map<String, dynamic> toMap() {
@@ -23,6 +32,7 @@ class PatientModel {
       'address': address,
       'gender': gender,
       'phone': phone,
+      'bookings': bookings?.map((b) => b.toMap()).toList(), // 🟢
     };
   }
 
@@ -35,6 +45,12 @@ class PatientModel {
       gender: map['gender'] as String,
       phone: map['phone'] as String,
       id: map['id'] as String?,
+      bookings:
+          (map['bookings'] as List<dynamic>?)
+              ?.map(
+                (b) => BookingModel.fromMap(b, b['id']),
+              ) // 🟢 مررت الـ id كمان
+              .toList(),
     );
   }
 }
