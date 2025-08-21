@@ -3,11 +3,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class BookingModel {
   final String day;
   final String reason;
+  final String note;
+  final int cost;
+  final int paid;
   final String time;
   final Timestamp createdAt; // Firestore expects Timestamp
   String? id;
 
-  BookingModel({
+  BookingModel(
+    this.note,
+    this.cost,
+    this.paid, {
     this.id,
     required this.day,
     required this.reason,
@@ -18,10 +24,14 @@ class BookingModel {
   // تحويل من Map (Firestore document) لـ BookingModel
   factory BookingModel.fromMap(Map<String, dynamic> map, String docId) {
     return BookingModel(
+      map['note'] ?? '',
+      map['cost'] ?? 0,
+      map['paid'] ?? 0,
       id: docId,
       day: map['day'] ?? '',
       reason: map['reason'] ?? '',
-      createdAt: map['createdAt'] as Timestamp, // ✅ تأكد من النوع
+      createdAt: map['createdAt'] as Timestamp,
+      // ✅ تأكد من النوع
       time: map['time'] ?? '',
     );
   }
@@ -29,6 +39,9 @@ class BookingModel {
   // تحويل من BookingModel لـ Map عشان تخزن في Firestore
   Map<String, dynamic> toMap() {
     return {
+      "note": note,
+      "cost": cost,
+      "paid": paid,
       "id": id,
       "day": day,
       "reason": reason,
