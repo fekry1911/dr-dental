@@ -3,6 +3,8 @@ import 'package:dr_dental/data/models/patient_model.dart';
 import 'package:dr_dental/featuers/home/screens/patients/data/model/booking_model.dart';
 import 'package:dr_dental/featuers/user/data/rebo/get_patient_data.dart';
 
+import '../models/last_Session.dart';
+
 class GetPatientDataImpl extends GetPatientData {
   final FirebaseFirestore firebaseFirestore;
 
@@ -72,6 +74,9 @@ class GetPatientDataImpl extends GetPatientData {
   Future addBookingToPatient(date, time,timeStamp, PatientModel patientModel) async {
     patientModel.bookings = time;
     BookingModel bookingModel = BookingModel(
+      "note",
+      0,
+      0,
       id: date,
       day: date,
       reason: "reason",
@@ -90,5 +95,11 @@ class GetPatientDataImpl extends GetPatientData {
         .collection("bookings")
         .doc(patientModel.id)
         .set({"createdAt":bookingModel.createdAt,"id":patientModel.id,...patientModel.toMap()});
+  }
+
+  @override
+  Future noteTheSession(BookingUpdateModel bookingModel,id,bookingID) async{
+    await firebaseFirestore.collection("patients").doc(id).collection("bookings").doc(bookingID).update(bookingModel.toMap());
+
   }
 }

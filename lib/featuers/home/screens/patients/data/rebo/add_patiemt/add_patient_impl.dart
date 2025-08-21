@@ -47,6 +47,9 @@ class BookingPatientImpl extends BookingPatient {
           .doc(date); // 🔹 doc id = date
 
       BookingModel booking = BookingModel(
+        "note",
+        0,
+        0,
         id: date, // خلي id = date
         day: date,
         reason: "reason",

@@ -1,11 +1,14 @@
+import 'package:dr_dental/featuers/home/screens/patients/data/model/booking_model.dart';
 import 'package:dr_dental/featuers/user/logic/patient_data_cubit.dart';
+import 'package:dr_dental/featuers/user/presentation/widgets/bottom_sheet.dart';
 import 'package:dr_dental/featuers/user/presentation/widgets/calender.dart';
+import 'package:dr_dental/featuers/user/presentation/widgets/last_session.dart';
 import 'package:dr_dental/widgets/loading_widget.dart';
 import 'package:dr_dental/widgets/share_error_animation.dart';
 import 'package:flutter/material.dart';
+import 'package:timeline_tile/timeline_tile.dart';
 
 import '../../../core/app_export.dart';
-import '../../../widgets/calender.dart';
 
 class PatientScreen extends StatelessWidget {
   const PatientScreen({super.key});
@@ -22,6 +25,7 @@ class PatientScreen extends StatelessWidget {
         if (state is PatientDataFAil) {
           return Center(child: ErrorShared());
         }
+        BookingModel lastSession=cubit.bookings.first.reason=="reason"?cubit.bookings[1]:cubit.bookings.first;
         return Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
@@ -45,29 +49,20 @@ class PatientScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "📞 Phone: ${cubit.patientModel!.phone}",
-                    style: TextStyle(fontSize: 20.h),
+                  const Text(
+                    "Last session",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 13.h),
-                  Text(
-                    "🎂 Age: ${cubit.patientModel!.age}",
-                    style: TextStyle(fontSize: 20.h),
-                  ),
-                  SizedBox(height: 13.h),
-                  Text(
-                    "🚻 Gender: ${cubit.patientModel!.gender}",
-                    style: TextStyle(fontSize: 20.h),
-                  ),
-                  SizedBox(height: 20.h),
+                  const SizedBox(height: 12),
 
-                  // --- Appointments Section ---
-                  const Divider(thickness: 1),
+                  LastSession(booking:lastSession ,),
+
+                  SizedBox(height: 10.h),
                   const Text(
                     "Appointments",
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 12), // ...
 
                   cubit.bookings.isEmpty
                       ? const Center(
@@ -85,103 +80,147 @@ class PatientScreen extends StatelessWidget {
                         itemCount: cubit.bookings.length,
                         itemBuilder: (context, index) {
                           final item = cubit.bookings[index];
-                          return Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              /// Timeline Line + Dot
-                              Column(
-                                children: [
-                                  Container(
-                                    width: 2,
-                                    height: 20,
-                                    color:
-                                        index == 0
-                                            ? Colors.transparent
-                                            : Colors.grey,
-                                  ),
-                                  Container(
-                                    width: 12,
-                                    height: 12,
-                                    decoration: BoxDecoration(
-                                      color:
-                                          index == 0
-                                              ? Colors.blue
-                                              : Colors.grey,
-                                      shape: BoxShape.circle,
-                                    ),
-                                  ),
-                                  Container(
-                                    width: 2,
-                                    height: 60,
-                                    color:
-                                        index == cubit.bookings.length - 1
-                                            ? Colors.transparent
-                                            : Colors.grey,
-                                  ),
-                                ],
-                              ),
-                              SizedBox(width: 12),
 
-                              /// Appointment Card
-                              Expanded(
-                                child: Card(
-                                  color: Colors.white,
-                                  elevation: 0,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  margin: EdgeInsets.symmetric(vertical: 8),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(12.0),
-                                    child: Row(
-                                      children: [
-                                        Column(
-                                          crossAxisAlignment:
+                          return TimelineTile(
+                            alignment: TimelineAlign.start,
+                            isFirst: index == 0,
+                            isLast: index == cubit.bookings.length - 1,
+                            indicatorStyle: IndicatorStyle(
+                              width: 20,
+                              color: index == 0 ? Colors.blue : Colors.grey,
+                              padding: const EdgeInsets.all(6),
+                            ),
+                            beforeLineStyle: const LineStyle(
+                              color: Colors.grey,
+                              thickness: 2,
+                            ),
+                            afterLineStyle: const LineStyle(
+                              color: Colors.grey,
+                              thickness: 2,
+                            ),
+                            endChild: Card(
+                              color: Colors.white,
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              margin: const EdgeInsets.symmetric(vertical: 8),
+                              child: Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Row(
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
                                           CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "${item.day} | ${item.time}",
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.blue,
-                                              ),
-                                            ),
-                                            SizedBox(height: 6),
-                                            Text(
-                                              item.reason ?? "",
-                                              style: TextStyle(
-                                                color: Colors.black54,
-                                              ),
-                                            ),
-                                          ],
+                                      children: [
+                                        Text(
+                                          "${item.day} | ${item.time}",
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.blue,
+                                          ),
                                         ),
-                                        Spacer(),
-                                        IconButton(onPressed: (){
-                                          cubit.deletePatientAppointments(cubit.patientModel!.id!, cubit.bookings[index].id!);
-                                        }, icon: Icon(Icons.delete,color: Colors.red,)),
-                                        IconButton(onPressed: index == cubit.bookings.length - 1?null:(){
-                                          print(cubit.bookings);
-                                        }, icon: Icon(index != cubit.bookings.length - 1?Icons.edit:Icons.check,color: index != cubit.bookings.length - 1?Colors.blue:Colors.green,))
+                                        const SizedBox(height: 10),
+                                        Container(
+                                          padding: const EdgeInsets.all(10),
+                                          width: 150,
+                                          height: 100,
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey.shade200,
+                                            borderRadius: BorderRadius.circular(
+                                              12,
+                                            ),
+                                          ),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "📌  ${item.reason ?? ""}",
+                                                style: const TextStyle(
+                                                  color: Colors.black54,
+                                                ),
+                                              ),
+                                              const SizedBox(height: 5),
+                                              Text(
+                                                "📌  ${item.reason ?? ""}",
+                                                style: const TextStyle(
+                                                  color: Colors.black54,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                       ],
                                     ),
-                                  ),
+                                    const Spacer(),
+                                    IconButton(
+                                      onPressed: () {
+                                        cubit.deletePatientAppointments(
+                                          cubit.patientModel!.id!,
+                                          cubit.bookings[index].id!,
+                                        );
+                                      },
+                                      icon: const Icon(
+                                        Icons.delete,
+                                        color: Colors.red,
+                                      ),
+                                    ),
+                                    IconButton(
+                                      onPressed:
+                                          index == 0
+                                              ? () {
+                                                showEditProfileBottomSheet(
+                                                  context,
+                                                );
+                                              }
+                                              : null,
+                                      icon: Icon(
+                                        index == 0 ? Icons.edit : Icons.check,
+                                        color:
+                                            index != cubit.bookings.length - 1
+                                                ? Colors.blue
+                                                : Colors.green,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ],
+                            ),
                           );
                         },
                       ),
-                   SizedBox(height: 20.h),
+
+                  SizedBox(height: 20.h),
 
                   // Add booking button inside the same screen
                   Center(
-                    child: ElevatedButton.icon(
-                      onPressed: () {
-                        showStyledDatePickerDialogData(context,cubit.patientModel!);
-
-                      },
-                      icon: const Icon(Icons.add),
-                      label: const Text("Add Appointment"),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blue,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            minimumSize: Size(150.h, 50.h),
+                            padding: EdgeInsets.symmetric(horizontal: 16.h),
+                          ),
+                          onPressed: () {
+                            showStyledDatePickerDialogData(
+                              context,
+                              cubit.patientModel!,
+                            );
+                          },
+                          icon: const Icon(Icons.add, color: Colors.white),
+                          label: const Text(
+                            "Add Appointment",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ],
