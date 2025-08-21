@@ -27,12 +27,7 @@ class BookingPatientImpl extends BookingPatient {
     for (var doc in response.docs) {
       var patient = PatientModel.fromMap(doc.data()..['id'] = doc.id);
 
-      var bookingsSnap = await doc.reference.collection('bookings').get();
 
-      patient.bookings =
-          bookingsSnap.docs
-              .map((b) => BookingModel.fromMap(b.data(), b.id))
-              .toList();
 
       patientList.add(patient);
     }
@@ -55,7 +50,8 @@ class BookingPatientImpl extends BookingPatient {
         id: date, // خلي id = date
         day: date,
         reason: "reason",
-        createdAt: date,
+        createdAt: Timestamp.fromDate(DateTime.now()), // ✅ تحويل
+        time: date,
       );
 
       await bookingDocRef.set(booking.toMap());

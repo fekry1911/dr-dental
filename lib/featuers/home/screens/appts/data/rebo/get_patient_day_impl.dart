@@ -14,7 +14,7 @@ class GetPatientsDayImpl extends GetPatientsDay {
     final response = await firestore
         .collection('booking')
         .doc(day)
-        .collection('bookings')
+        .collection('bookings').orderBy("createdAt", descending: false)
         .get();
 
     return response.docs

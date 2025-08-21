@@ -43,4 +43,15 @@ class PatientDataCubit extends Cubit<PatientDataState> {
       emit(PatientDataFAil(e.toString()));
     }
   }
+  Future<void> addBookingToPatient(String date,String time,timeStamp,PatientModel patientModel) async {
+    emit(PatientDataLoading());
+    try {
+      await getPatientData.addBookingToPatient(date,time,timeStamp,patientModel);
+      bookings=[];
+      bookings=await getPatientData.getPatientAppointments(patientModel.id!);
+      emit(PatientAppoinmentsAdd());}
+        catch(e){
+      emit(PatientDataFAil(e.toString()));
+        }
+  }
 }
