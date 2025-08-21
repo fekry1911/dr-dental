@@ -1,8 +1,10 @@
+import 'package:dr_dental/core/helpers/extentions/context_extention.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
 
 import '../../../../../core/app_export.dart';
+import '../../../../../core/const/const.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/theme/text_themes.dart';
 import '../../../../../widgets/empty.dart';
@@ -87,9 +89,17 @@ class AppptsScreen extends StatelessWidget {
                             child: Row(
                               children: [
                                 Expanded(
-                                  child: PatientCard(
-                                    name: cubit.patients[index].name,
-                                    age: cubit.patients[index].age,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      context.pushNamed(
+                                        patientScreen,
+                                        arguments: cubit.patients[index].id,
+                                      );
+                                    },
+                                    child: PatientCard(
+                                      name: cubit.patients[index].name,
+                                      age: cubit.patients[index].bookings!,
+                                    ),
                                   ),
                                 ),
                               ],

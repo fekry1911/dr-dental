@@ -6,4 +6,5 @@ abstract class GetPatientData{
   Future<List<BookingModel>> getPatientAppointments(String id);
   Future deletePatient(String id);
   Future deletePatientAppointments(String patientId,String bookID);
+  Future addBookingToPatient(date,time,timeStamp,PatientModel patientModel);
 }

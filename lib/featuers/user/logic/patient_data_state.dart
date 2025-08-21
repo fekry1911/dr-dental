@@ -42,5 +42,10 @@ class PatientAppoinmentsDelete extends PatientDataState {
   // TODO: implement props
   List<Object?> get props =>[];
 }
+class PatientAppoinmentsAdd extends PatientDataState {
+  @override
+  // TODO: implement props
+  List<Object?> get props =>[];
+}
 
 

@@ -23,7 +23,6 @@ class BookPatientCubit extends Cubit<BookPatientState> {
     emit(GetAllPatientsLoading());
     try {
       patients = await bookingPatient.getAllPatients();
-      print(patients[0].bookings);
 
       emit(GetAllPatientsSucc(patients));
     } catch (e) {
@@ -46,8 +45,8 @@ class BookPatientCubit extends Cubit<BookPatientState> {
   Future<void> bookPatient(String date) async {
     emit(GetAllPatientsLoading());
     try {
-      await bookingPatient.bookingPatient(selectedPatients, date);
-      await bookingPatient.addBookingToPatient(selectedPatients, date);
+      // await bookingPatient.bookingPatient(selectedPatients, date);
+      // await bookingPatient.addBookingToPatient(selectedPatients, date);
       getAllPatients();
       selectedPatients.clear();
       selectionMode = false;
