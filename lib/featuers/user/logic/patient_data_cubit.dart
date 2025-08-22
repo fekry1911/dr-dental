@@ -71,6 +71,8 @@ class PatientDataCubit extends Cubit<PatientDataState> {
         cost: int.parse(cost.text),
         paid: int.parse(paid.text),);
       await getPatientData.noteTheSession(bookingUpdateModel,id,bookID);
+      bookings=[];
+      bookings=await getPatientData.getPatientAppointments(id);
       emit(PatientDataNote());
     }
     catch(e){
