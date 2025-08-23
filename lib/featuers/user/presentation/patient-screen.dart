@@ -16,7 +16,8 @@ class PatientScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Patient Details")),
+      backgroundColor: Colors.white,
+      appBar: AppBar(title: const Text("Patient Details"),backgroundColor: Colors.white,),
       body: BlocConsumer<PatientDataCubit, PatientDataState>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -98,92 +99,103 @@ class PatientScreen extends StatelessWidget {
                             color: Colors.grey,
                             thickness: 2,
                           ),
-                          endChild: Card(
-                            color: Colors.white,
-                            elevation: 0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            margin: const EdgeInsets.symmetric(vertical: 8),
-                            child: Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: Row(
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "${item.day} | ${item.time}",
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.blue,
-                                        ),
-                                      ),
-                                      const SizedBox(height: 10),
-                                      Container(
-                                        padding: const EdgeInsets.all(10),
-                                        width: 150,
-                                        height: 100,
-                                        decoration: BoxDecoration(
-                                          color: Colors.grey.shade200,
-                                          borderRadius: BorderRadius.circular(
-                                            12,
+                          endChild: Expanded(
+                            child: Card(
+                              color: Colors.white,
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              margin: const EdgeInsets.symmetric(vertical: 8),
+                              child: Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 4,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "${item.day} | ${item.time}",
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.blue,
+                                            ),
                                           ),
-                                        ),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "📌  ${item.reason ?? ""}",
-                                              style: const TextStyle(
-                                                color: Colors.black54,
+                                          const SizedBox(height: 10),
+                                          Container(
+                                            padding: const EdgeInsets.all(10),
+                                            width: double.infinity,
+                                            decoration: BoxDecoration(
+                                              color: Colors.grey.shade200,
+                                              borderRadius: BorderRadius.circular(
+                                                12,
                                               ),
                                             ),
-                                            const SizedBox(height: 5),
-                                            Text(
-                                              "📌  ${item.reason ?? ""}",
-                                              style: const TextStyle(
-                                                color: Colors.black54,
-                                              ),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  "📌  ${item.reason ?? ""}",
+                                                  style: const TextStyle(
+                                                    color: Colors.black54,
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 5),
+                                                Text(
+                                                  "📌  ${item.reason ?? ""}",
+                                                  style: const TextStyle(
+                                                    color: Colors.black54,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
-                                  const Spacer(),
-                                  IconButton(
-                                    onPressed: () {
-                                      cubit.deletePatientAppointments(
-                                        cubit.patientModel!.id!,
-                                        cubit.bookings[index].id!,
-                                      );
-                                    },
-                                    icon: const Icon(
-                                      Icons.delete,
-                                      color: Colors.red,
                                     ),
-                                  ),
-                                  IconButton(
-                                    onPressed:
-                                    index == 0
-                                        ? () {
-                                      showEditProfileBottomSheet(
-                                        context,
-                                      );
-                                    }
-                                        : null,
-                                    icon: Icon(
-                                      index == 0 ? Icons.edit : Icons.check,
-                                      color:
-                                      index != cubit.bookings.length - 1
-                                          ? Colors.blue
-                                          : Colors.green,
-                                    ),
-                                  ),
-                                ],
+                                    const Spacer(),
+                                    Expanded(
+                                      flex: 2,
+                                      child: Row(
+                                        children: [
+                                          IconButton(
+                                            onPressed: () {
+                                              cubit.deletePatientAppointments(
+                                                cubit.patientModel!.id!,
+                                                cubit.bookings[index].id!,
+                                              );
+                                            },
+                                            icon: const Icon(
+                                              Icons.delete,
+                                              color: Colors.red,
+                                            ),
+                                          ),
+                                          IconButton(
+                                            onPressed:
+                                            index == 0
+                                                ? () {
+                                              showEditProfileBottomSheet(
+                                                context,
+                                              );
+                                            }
+                                                : null,
+                                            icon: Icon(
+                                              index == 0 ? Icons.edit : Icons.check,
+                                              color:
+                                              index != cubit.bookings.length - 1
+                                                  ? Colors.blue
+                                                  : Colors.green,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           ),
