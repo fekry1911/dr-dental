@@ -12,75 +12,30 @@ class BookPatientCubit extends Cubit<BookPatientState> {
 
   BookPatientCubit(this.bookingPatient) : super(AddPatientInitial());
 
-  bool selectionMode = false;
-  Set<PatientModel> selectedPatients = {};
+  List<PatientModel> allPatients = [];
   List<PatientModel> patients = [];
-  List<BookingModel> bookings = [];
 
   Future<void> getAllPatients() async {
-    patients = [];
-    bookings = [];
     emit(GetAllPatientsLoading());
     try {
-      patients = await bookingPatient.getAllPatients();
-
+      allPatients = await bookingPatient.getAllPatients();
+      patients = allPatients; // في البداية بتساويهم
       emit(GetAllPatientsSucc(patients));
     } catch (e) {
       emit(GetAllPatientsFAil(e.toString()));
     }
   }
 
-  Future<void> deletePatients() async {
-    try {
-      await bookingPatient.deletePatientsBookings(selectedPatients);
-      await bookingPatient.deletePatients(selectedPatients);
-      selectedPatients.clear();
-      selectionMode = false;
-      getAllPatients();
-    } catch (e) {
-      emit(GetAllPatientsFAil(e.toString()));
-    }
-  }
-
-  Future<void> bookPatient(String date) async {
-    emit(GetAllPatientsLoading());
-    try {
-      // await bookingPatient.bookingPatient(selectedPatients, date);
-      // await bookingPatient.addBookingToPatient(selectedPatients, date);
-      getAllPatients();
-      selectedPatients.clear();
-      selectionMode = false;
-
-      emit(GetAllPatientsSucc(patients));
-    } catch (e) {
-      emit(GetAllPatientsFAil(e.toString()));
-    }
-  }
-
-  void toggleSelectionMode(bool enable) {
-    selectionMode = enable;
-    if (!enable) {
-      selectedPatients.clear();
-    }
-    emit(AddPatientSelectionChanged({...selectedPatients}, selectionMode));
-  }
-
-  void clearSelection() {
-    selectedPatients.clear();
-    selectionMode = false;
-    emit(AddPatientSelectionChanged({...selectedPatients}, selectionMode));
-  }
-
-  void togglePatientSelection(PatientModel patient) {
-    if (selectedPatients.contains(patient)) {
-      selectedPatients.remove(patient);
-      if (selectedPatients.isEmpty) {
-        selectionMode = false;
-      }
+  void searchPatients(String query) {
+    if (query.isEmpty) {
+      patients = allPatients;
     } else {
-      selectedPatients.add(patient);
-      selectionMode = true;
+      patients = allPatients.where((patient) {
+        return patient.name.toLowerCase().contains(query.toLowerCase());
+      }).toList();
     }
-    emit(AddPatientSelectionChanged({...selectedPatients}, selectionMode));
+    emit(GetAllPatientsSucc(patients));
   }
+
+
 }
