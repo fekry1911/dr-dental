@@ -27,25 +27,6 @@ class PatientCard extends StatelessWidget {
         padding: EdgeInsets.all(10.h),
         child: Row(
           children: [
-            if (showCheckbox)
-              Theme(
-                data: Theme.of(context).copyWith(
-                  checkboxTheme: CheckboxThemeData(
-                    fillColor: MaterialStateProperty.all(Colors.transparent),
-                  ),
-                ),
-                child: Checkbox(
-                  value: isChecked,
-                  onChanged: onChanged,
-                  checkColor: Colors.white, // لون الصح
-                  fillColor: MaterialStateProperty.resolveWith((states) {
-                    if (states.contains(MaterialState.selected)) {
-                      return Colors.blue;
-                    }
-                    return Colors.grey;
-                  }),
-                ),
-              ),
             CircleAvatar(
               radius: 25.h,
               backgroundColor: Colors.blue,
