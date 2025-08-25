@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/theme/text_style_helper.dart';
+import '../../../../widgets/awesome_loading.dart';
 import '../../../../widgets/custom_image_view.dart';
 import '../../logic/login_cubit.dart';
 
@@ -237,7 +238,7 @@ Widget buildLoginButton(BuildContext context, LoginCubit cubit) {
   return SizedBox(
     width: double.infinity,
     height: 60.h,
-    child:cubit.state is LoginLoading?LoadingShared(): ElevatedButton(
+    child:cubit.state is LoginLoading?LoadingWidget(): ElevatedButton(
       onPressed: (){
         cubit.logIN();
 

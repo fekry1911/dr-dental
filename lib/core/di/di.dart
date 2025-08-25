@@ -8,7 +8,6 @@ import 'package:dr_dental/featuers/user/data/rebo/get_patient_data.dart';
 import 'package:dr_dental/featuers/user/data/rebo/get_patient_data_impl.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
-
 import '../../featuers/home/logic/home_cubit.dart';
 import '../../featuers/home/screens/add_patients/data/rebo/add_new_patient.dart';
 import '../../featuers/home/screens/add_patients/data/rebo/add_new_patient_impl.dart';
