@@ -1,16 +1,42 @@
-# dr_dental
+# 🦷 Dr Dental
 
-A new Flutter project.
+**Dr Dental** is a Flutter mobile application designed for dentists to manage their patients' appointments efficiently.  
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 🚀 Features
 
-A few resources to get you started if this is your first Flutter project:
+- 📅 Book and manage appointments  
+- 🦷 Doctor dashboard to track patients  
+- 📱 Modern and user-friendly UI  
+- ⚡️ High performance with **Bloc State Management**
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🛠️ Tech Stack
+
+- **Framework**: Flutter (Dart)  
+- **State Management**: Bloc / Cubit  
+- **Backend**: Firebase (Authentication, Firestore)  
+- **Database**: Firestore  
+
+---
+
+
+
+## ⚙️ Installation
+
+1. Clone the repository:
+2. cd dr-dental
+3. flutter pub get
+4. flutter run
+
+##📂 Folder Structure
+lib/
+│-- core/        # Theme, colors, helpers
+│-- features/    # Application modules (Login, Home, Booking, etc.)
+│-- widgets/     # Reusable common widgets
+│-- main.dart    # Application entry point
+
+```bash
+git clone https://github.com/fekry1911/dr-dental.git
