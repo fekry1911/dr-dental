@@ -24,37 +24,34 @@ class AllPatients extends StatelessWidget {
       padding: EdgeInsets.all(8.0.h),
       child: Column(
         children: [
-          Expanded(
-            flex: 2,
-            child: Container(
-              margin: EdgeInsets.only(bottom: 10.h),
-              child: TextFormField(
-                cursorColor: AppColors.mainBlueColor,
-                decoration: InputDecoration(
+          Container(
+            margin: EdgeInsets.only(bottom: 10.h),
+            child: TextFormField(
+              cursorColor: AppColors.mainBlueColor,
+              decoration: InputDecoration(
 
-                  filled: true,
-                  fillColor: Colors.grey[100],
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide.none,
+                filled: true,
+                fillColor: Colors.grey[100],
+                border: OutlineInputBorder(
+                  borderSide: BorderSide.none,
 
-                    borderRadius: BorderRadius.circular(10.0.h),
-                  ),
-                  hintText: 'Search',
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0.h),
-
-                    borderSide: BorderSide(
-                      color: Colors.blue, // لون الـ border عند التركيز (focus)
-
-                    ),),
-
-                  prefixIcon: Icon(Icons.search),
+                  borderRadius: BorderRadius.circular(10.0.h),
                 ),
-                onChanged: (value) {
-                  cubit.searchPatients(value);
-                },
-              ).animate().flipV(duration: 1000.ms),
-            ),
+                hintText: 'Search',
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0.h),
+
+                  borderSide: BorderSide(
+                    color: Colors.blue, // لون الـ border عند التركيز (focus)
+
+                  ),),
+
+                prefixIcon: Icon(Icons.search),
+              ),
+              onChanged: (value) {
+                cubit.searchPatients(value);
+              },
+            ).animate().flipV(duration: 1000.ms),
           ),
           SizedBox(height: 15.h),
 

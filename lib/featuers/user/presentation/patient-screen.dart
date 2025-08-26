@@ -47,6 +47,7 @@ class _PatientScreenState extends State<PatientScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.secondryColor,
       appBar: AppBar(
         backgroundColor: AppColors.secondryColor,
       ),
@@ -165,7 +166,7 @@ class _PatientScreenState extends State<PatientScreen>
                                     child: Row(
                                       children: [
                                         Expanded(
-                                          flex: 4,
+                                          flex: 6,
                                           child: Column(
                                             crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -221,12 +222,15 @@ class _PatientScreenState extends State<PatientScreen>
                                             ],
                                           ),
                                         ),
-                                        const Spacer(),
                                         Expanded(
-                                          flex: 2,
+                                          flex: 3,
                                           child: Row(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            mainAxisSize: MainAxisSize.min,
                                             children: [
                                               IconButton(
+                                                padding: EdgeInsets.zero,
                                                 onPressed: () {
                                                   cubit
                                                       .deletePatientAppointments(
@@ -235,12 +239,13 @@ class _PatientScreenState extends State<PatientScreen>
                                                         .id!,
                                                   );
                                                 },
-                                                icon: const Icon(
+                                                icon:  Icon(
                                                   Icons.delete,
                                                   color: Colors.red,
                                                 ),
                                               ),
                                               IconButton(
+                                                padding: EdgeInsets.zero,
                                                 onPressed: index == 0
                                                     ? () {
                                                   showEditProfileBottomSheet(
@@ -257,6 +262,7 @@ class _PatientScreenState extends State<PatientScreen>
                                                           1
                                                       ? Colors.blue
                                                       : Colors.green,
+
                                                 ),
                                               ),
                                             ],

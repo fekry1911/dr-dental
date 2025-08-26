@@ -19,7 +19,7 @@ class BookPatientCubit extends Cubit<BookPatientState> {
     emit(GetAllPatientsLoading());
     try {
       allPatients = await bookingPatient.getAllPatients();
-      patients = allPatients; // في البداية بتساويهم
+      patients = allPatients;
       emit(GetAllPatientsSucc(patients));
     } catch (e) {
       emit(GetAllPatientsFAil(e.toString()));
