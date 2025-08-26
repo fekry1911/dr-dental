@@ -31,7 +31,7 @@
 3. flutter pub get
 4. flutter run
 
-##📂 Folder Structure
+## 📂 Folder Structure
 lib/
 │-- core/        # Theme, colors, helpers
 │-- features/    # Application modules (Login, Home, Booking, etc.)
